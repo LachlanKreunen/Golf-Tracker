@@ -2,7 +2,7 @@
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   display: flex;
   line-height: 1.5;
-  font-weight: 400;
+  font-weight: 500;
   align-items: center;
   text-align: center;
   justify-content: center;
@@ -10,6 +10,7 @@
   color-scheme: light dark;
   color: rgba(0, 0, 0, 0.87);
   background-color: #76d4bc;
+  font-size: 1em;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -46,6 +47,16 @@ h1 {
   gap: 50px;
   margin-top: 20px;
 
+}
+
+input {
+  background-color: white;
+  border-radius: 8px;
+  padding: 0.3em 0.6em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  color: black;
 }
 
 button {
