@@ -40,3 +40,18 @@
 .read-the-docs {
   color: #6bbdf0;
 }
+
+.toggle-group,
+.putt-buttons,
+.score-buttons {
+  display: flex;
+  width: 100%;
+  gap: 0.5rem;
+}
+
+.toggle-group button,
+.putt-buttons .putt-btn,
+.score-buttons .score-btn {
+  flex: 1;
+  min-width: 0;
+}

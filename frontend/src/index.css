@@ -1,21 +1,43 @@
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  display: flex;
   line-height: 1.5;
   font-weight: 500;
-  align-items: center;
-  text-align: center;
-  justify-content: center;
-  height: 500px;
   color-scheme: light dark;
   color: rgba(0, 0, 0, 0.87);
-  background-color: #76d4bc;
+  background-color: #d4edda;
   font-size: 1em;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; 
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #66a4db;
+    background-color: #ffffff;
+  }
+}
+
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background-color: var(--bg, #d4edda);
+}
+
+.app-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2rem 0;
+  background-color: inherit;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
 }
 
 a {
@@ -26,27 +48,10 @@ a {
 a:hover {
   color: #535bf2;
 }
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-.button-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 50px;
-  margin-top: 20px;
-
+@media (prefers-color-scheme: light) {
+  a:hover {
+    color: #747bff;
+  }
 }
 
 input {
@@ -59,9 +64,17 @@ input {
   color: black;
 }
 
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  margin-top: 20px;
+}
+
 button {
+  appearance: none;
   border-radius: 8px;
-  border: 1px solid thin;
+  border: 1px solid transparent;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
@@ -78,16 +91,138 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
-
 @media (prefers-color-scheme: light) {
-  :root {
-    color: #66a4db;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
   button {
     background-color: #f9f9f9;
   }
 }
+
+.card {
+  position: relative;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin: 2rem auto;
+  max-width: 480px;
+  width: 90%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.gir-grid,
+.fir-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.putts-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.5rem;
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.score-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.gir-grid button,
+.fir-grid button,
+.putts-grid button,
+.score-grid button {
+  background-color: #f2f6ff;
+  color: rgb(68, 128, 113);
+  border: none;
+  border-radius: 8px;
+  height: 48px;
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease,
+    box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.gir-grid button:hover,
+.fir-grid button:hover,
+.putts-grid button:hover,
+.score-grid button:hover,
+.nav-buttons button.hover {
+  background-color: #d4edda;
+}
+
+.gir-grid button.selected,
+.fir-grid button.selected,
+.putts-grid button.selected,
+.score-grid button.selected,
+.nav-buttons button.hover {
+  background-color: #d4edda;
+  color: rgb(68, 128, 113);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgb(68, 128, 113);
+}
+
+.gir-grid button:focus,
+.fir-grid button:focus,
+.putts-grid button:focus,
+.score-grid button:focus,
+.gir-grid button:focus-visible,
+.fir-grid button:focus-visible,
+.putts-grid button:focus-visible,
+.score-grid button:focus-visible
+.nav-buttons button:focus-visible{
+  outline: none;
+}
+
+.nav-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+  gap: 1rem;
+}
+
+.nav-buttons button {
+  appearance: none;
+  background-color: #f2f6ff;
+  color: #111;
+  border: none;
+  border-radius: 12px;
+  height: 48px;
+  padding: 0 1.2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.nav-buttons button:hover {
+  background-color: #d4edda;
+}
+
+.nav-buttons button:active {
+  background-color: inherit;
+  color: #155724;
+  border: 2px solid #1261F8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.12);
+}
+
+.nav-buttons button:focus,
+.nav-buttons button:focus-visible {
+  outline: none;
+}
+

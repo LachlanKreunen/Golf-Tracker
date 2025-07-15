@@ -6,6 +6,7 @@ import Login from './Pages/Login';
 function App() {
 
   return (
+      <div className="app-container">
     <Router>
       <Routes>
         <Route path="/" element = {<Home/>} />
@@ -15,6 +16,7 @@ function App() {
         <Route path ="/login" element={<Login />} />
       </Routes>
     </Router>
+    </div>
   )
 }
 
