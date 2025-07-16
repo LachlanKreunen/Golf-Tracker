@@ -6,7 +6,7 @@ function Button({txt, page}) {
         navigate(page);
     }
 
-    return <button onClick={click}>{txt}</button>;
+    return <button className="pill-button" onClick={click}>{txt}</button>;
 }
 
 export default Button;

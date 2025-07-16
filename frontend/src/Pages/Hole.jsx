@@ -37,7 +37,7 @@ export default function Hole() {
   return (
     <div className="card">
       <h1>Hole {holeNumber}</h1>
-      <p style={{ color: "#448071" }}>
+      <p style={{ color: "#448071", fontSize: "1.5rem" }}>
         Par {par}: {yards} Yards </p>
 
       <label>
@@ -92,7 +92,7 @@ export default function Hole() {
       </label>
 
       <label>
-        Score:
+        Score
         <div className="score-grid">
           {Array.from({ length: par + 3 }, (_, i) => i + 1).map(val => (
             <button

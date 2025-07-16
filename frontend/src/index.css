@@ -133,10 +133,12 @@ button:focus-visible {
   margin: 1rem 0;
 }
 
+/* Base styles for grid buttons and .button-container buttons */
 .gir-grid button,
 .fir-grid button,
 .putts-grid button,
-.score-grid button {
+.score-grid button,
+.button-container button {
   background-color: #f2f6ff;
   color: rgb(68, 128, 113);
   border: none;
@@ -155,37 +157,51 @@ button:focus-visible {
   cursor: pointer;
 }
 
+/* Hover and selected (including hover-state on “.selected”) */
 .gir-grid button:hover,
 .fir-grid button:hover,
 .putts-grid button:hover,
 .score-grid button:hover,
-.nav-buttons button.hover {
-  background-color: #d4edda;
-}
-
+.button-container button:hover,
 .gir-grid button.selected,
 .fir-grid button.selected,
 .putts-grid button.selected,
 .score-grid button.selected,
-.nav-buttons button.hover {
+.button-container button.selected {
   background-color: #d4edda;
-  color: rgb(68, 128, 113);
+}
+
+/* Extra effects for selected */
+.gir-grid button.selected,
+.fir-grid button.selected,
+.putts-grid button.selected,
+.score-grid button.selected,
+.button-container button.selected {
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgb(68, 128, 113);
 }
 
+/* Remove default focus outline */
 .gir-grid button:focus,
 .fir-grid button:focus,
 .putts-grid button:focus,
 .score-grid button:focus,
+.button-container button:focus,
 .gir-grid button:focus-visible,
 .fir-grid button:focus-visible,
 .putts-grid button:focus-visible,
-.score-grid button:focus-visible
-.nav-buttons button:focus-visible{
+.score-grid button:focus-visible,
+.button-container button:focus-visible {
   outline: none;
 }
 
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* ———————————————————————————————————————— */
+/* Nav‐buttons stay slightly different, but are also DRY’d */
 .nav-buttons {
   display: flex;
   justify-content: space-between;
@@ -204,8 +220,11 @@ button:focus-visible {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-  transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease,
+    box-shadow 0.2s ease;
   cursor: pointer;
 }
 
@@ -218,11 +237,49 @@ button:focus-visible {
   color: #155724;
   border: 2px solid #1261F8;
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.12);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
 }
 
 .nav-buttons button:focus,
 .nav-buttons button:focus-visible {
   outline: none;
 }
+
+/* ---------- in index.css (or your global stylesheet) ---------- */
+
+/* 1. Container now uses your existing .container */
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: #fafcff;
+}
+
+
+/* 3. Grey inputs */
+.login-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #f2f6ff;
+  font-size: 1rem;
+  color: #444;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+  transition: box-shadow 0.2s ease;
+}
+
+.login-input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(68,128,113,0.3);
+}
+
+.login-input::placeholder {
+  color: #448071;
+}
+
+/* button‐container rules are already consolidated from before */
+
 
