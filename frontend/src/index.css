@@ -270,5 +270,32 @@ button:focus-visible {
   color: #448071;
 }
 
+.stats {
+  font-size: 1.5rem;
+  text-align: center;
+}
 
+.hc {
+  font-size: 2.5rem;
+  text-align: center;
+}
+
+.logout-button {
+  align-self: flex-end;
+  background: none;
+  border: none;
+  color: #448071;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.logout-button:hover {
+  text-decoration: underline;
+}
+
+.logout-button:focus,
+.logout-button:active {
+  outline: none;
+  box-shadow: none;
+}
 
