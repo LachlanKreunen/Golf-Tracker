@@ -23,6 +23,7 @@ const Login = () => {
         <>
         <div className="card">
             <button className="logout-button" onClick={handleLogout}>Log Out</button>
+            <div className="corner">username</div>
             
             <div className="hc">
                 <p><span style={{ color: "#448071", fontWeight: "bold" }}>{stats.handicap}</span> Handicap</p>

@@ -299,3 +299,9 @@ button:focus-visible {
   box-shadow: none;
 }
 
+.corner {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+  }
+
