@@ -16,7 +16,6 @@ const Signup = () => {
     e?.preventDefault();
     setErr(null);
 
-    // Simple client-side validation (matches backend expectation)
     if (!username || !password) {
       setErr("Username and password are required.");
       return;
@@ -34,13 +33,11 @@ const Signup = () => {
         body: JSON.stringify({ first, last, username, password }),
       });
 
-      // Read raw text first; backend might return HTML on errors
       const raw = await res.text();
       let data = {};
       try { data = raw ? JSON.parse(raw) : {}; } catch { /* non-JSON error */ }
 
       if (!res.ok) {
-        // Prefer server-provided message, else include status
         const msg =
           data?.error ||
           raw?.slice(0, 200) ||
@@ -56,11 +53,11 @@ const Signup = () => {
         throw new Error("Register succeeded but no token/user returned.");
       }
 
-      // Persist auth (your app expects these keys elsewhere)
+      // Persist auth
       localStorage.setItem("gt_token", token);
       localStorage.setItem("gt_user", JSON.stringify(user));
 
-      // Navigate to /login (same flow you used before)
+      // Navigate to /login
       navigate("/login", { replace: true });
     } catch (e) {
       setErr(e.message);
@@ -73,7 +70,6 @@ const Signup = () => {
     <div className="card">
       <h1>Create Account</h1>
 
-      {/* wrap inputs in a form so Enter submits */}
       <form onSubmit={handleSignup} style={{ display: "contents" }}>
         <input
           type="text"

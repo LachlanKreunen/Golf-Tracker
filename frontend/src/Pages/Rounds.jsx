@@ -2,7 +2,6 @@ import "../index.css";
 import { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
-/* ---------- utils ---------- */
 function fmtDate(d) {
   try { return new Date(d).toLocaleDateString(); } catch { return ""; }
 }
@@ -45,7 +44,6 @@ function boxStyle(mark) {
   }
 }
 
-/* ---------- component ---------- */
 const Rounds = () => {
   const navigate = useNavigate();
   const [rounds, setRounds] = useState([]);
@@ -53,7 +51,6 @@ const Rounds = () => {
   const [loadErr, setLoadErr] = useState("");
   const [inspect, setInspect] = useState(null);
 
-  // One-time cleanup of any legacy client-stored rounds
   useEffect(() => {
     try { localStorage.removeItem("rounds"); } catch {}
   }, []);
@@ -71,7 +68,6 @@ const Rounds = () => {
       let data; try { data = text ? JSON.parse(text) : {}; } catch { data = {}; }
       if (!res.ok) throw new Error(data?.error || "Failed to load rounds");
       const raw = Array.isArray(data.rounds) ? data.rounds : [];
-      // Show only documents that clearly came from Mongo (have an _id)
       const fromDb = raw.filter(r => r && (r._id || r._id?.$oid));
       setRounds(fromDb);
     } catch (e) {
@@ -96,17 +92,16 @@ const Rounds = () => {
         headers: { Authorization: `Bearer ${token}`, Accept: "application/json" },
       });
       if (!res.ok) throw new Error("Delete failed");
-      // Re-sync with server truth
       await refetchRounds();
     } catch (err) {
       console.error("Delete error:", err);
-      // Keep UI unchanged; no error HTML is surfaced
+    
     }
   }
 
   return (
     <section style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 16, width: "100%", padding: "8px 12px" }}>
-      {/* Hole detail overlay */}
+      {/* Hole overlay */}
       {inspect && (
         <div
           onClick={(e)=>{ if(e.target === e.currentTarget) setInspect(null); }}
@@ -137,7 +132,7 @@ const Rounds = () => {
         </div>
       )}
 
-      {/* Header: text-style Back + title */}
+      {/* Header*/}
       <div style={{display:"flex",alignItems:"center",gap:"1rem",width:"100%",maxWidth:720,justifyContent:"flex-start"}}>
         <button
           className="logout-button"

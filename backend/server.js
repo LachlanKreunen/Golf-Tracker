@@ -190,8 +190,6 @@ app.delete("/rounds/:id", requireAuth, async (req, res) => {
 });
 
 
-
-/* ---------- Start ---------- */
 app.listen(PORT, () => {
   console.log(`running at http://127.0.0.1:${PORT}`);
 });

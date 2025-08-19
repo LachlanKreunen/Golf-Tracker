@@ -27,7 +27,7 @@ const Home = () => {
       localStorage.setItem("gt_token", data.token);
       localStorage.setItem("gt_user", JSON.stringify(data.user));
 
-      // ✅ redirect via React Router (more reliable than alert + location.href)
+      //redirect via React Router
       navigate("/login", { replace: true });
     } catch (e2) {
       setErr(e2.message);
