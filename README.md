@@ -9,7 +9,7 @@ Built with React, Node.js/Express, and MongoDB.
 
 Repliicate:
 
-git clone https://github.com/your-username/golf-tracker.git
+git clone https://github.com/LachlanKreunen/golf-tracker.git
 cd golf-tracker
 
 Install dependencies:
