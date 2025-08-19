@@ -228,9 +228,8 @@ button:focus-visible {
 
 .nav-buttons button:active {
   background-color: inherit;
-  color: #155724;
-  border: 2px solid #1261F8;
-  transform: translateY(-2px);
+  color: #448071;
+  
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
 }
 
@@ -304,4 +303,139 @@ button:focus-visible {
     top: 30px;
     right: 30px;
   }
+
+/* Dropdown: remove bullets and normalize spacing */
+.results-dropdown {
+  list-style: none;       /* no bullets */
+  margin: 0;
+  padding: 0;
+  background: #ffffff;    /* match your cards/inputs */
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+
+/* Each option is a full-width button that matches the app’s buttons */
+.results-dropdown li {
+  margin: 0;
+  padding: 0;
+}
+
+.results-dropdown li > button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: #f2f6ff;         /* aligns with your .nav-buttons button bg */
+  color: #111;
+  border: none;
+  padding: 0.8rem 1rem;
+  font: inherit;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.05s ease;
+}
+
+.results-dropdown li + li { margin-top: 2px; }   /* ← space between items */
+
+/* Hover/active states consistent with your buttons */
+.results-dropdown li > button:hover {
+  background-color: #d4edda;   /* you already use this accent */
+}
+
+.results-dropdown li > button:active {
+  background-color: inherit;
+  color: #155724;
+  border-left: 3px solid #448071; /* subtle active cue */
+}
+
+.results-dropdown li > button.selected {
+  background: #e9f2ff;
+  border-left: 3px solid #448071;
+}
+
+/* Input styling (if you want the search box to match buttons) */
+.search-input {
+  width: 100%;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 12px;
+  padding: 0.8rem 1rem;
+  outline: none;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.search-input:focus {
+  border-color: #1261F8;
+  box-shadow: 0 0 0 3px rgba(18, 97, 248, 0.15);
+}
+
+/* ==== Round History Grid ==== */
+.history-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+  margin-top: 8px;
+}
+
+/* Individual round card */
+.round-card {
+  border: 1px solid #e7eef0;
+  border-radius: 14px;
+  padding: 12px;
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(15, 30, 60, 0.06);
+}
+
+/* Header (course + date) */
+.round-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 8px;
+}
+.round-title { font-weight: 700; }
+.round-sub { opacity: .7; font-size: .9rem; }
+
+/* Meta row (to par / gross) */
+.round-meta {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+  opacity: .9;
+}
+.round-meta strong { color: #448071; }
+
+/* OUT / IN rows */
+.hole-section {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0;
+}
+.nine-label { font-weight: 600; opacity: .8; width: 42px; text-align: left; }
+.nine-total { font-weight: 700; color: #448071; }
+
+/* 9-hole score boxes */
+.hole-grid {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 4px;
+}
+.hole-box {
+  text-align: center;
+  padding: 8px 0;
+  border: 1px solid #e6ecec;
+  border-radius: 10px;
+  font-weight: 600;
+  background: #f9fbfb;
+}
+
+/* Footer (open button) */
+.round-footer {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
 

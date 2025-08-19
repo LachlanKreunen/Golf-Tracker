@@ -1,49 +1,126 @@
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../index.css";
-import Button from "../Button";
 
 const Signup = () => {
+  const navigate = useNavigate();
 
-    return (
-    <>
-        <div className="card">
-            <h1 >Create Account</h1>  
-            <input
+  const [first, setFirst] = useState("");
+  const [last, setLast] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [err, setErr] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  async function handleSignup(e) {
+    e?.preventDefault();
+    setErr(null);
+
+    // Simple client-side validation (matches backend expectation)
+    if (!username || !password) {
+      setErr("Username and password are required.");
+      return;
+    }
+    if (password.length < 6) {
+      setErr("Password must be at least 6 characters.");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const res = await fetch("http://127.0.0.1:8080/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ first, last, username, password }),
+      });
+
+      // Read raw text first; backend might return HTML on errors
+      const raw = await res.text();
+      let data = {};
+      try { data = raw ? JSON.parse(raw) : {}; } catch { /* non-JSON error */ }
+
+      if (!res.ok) {
+        // Prefer server-provided message, else include status
+        const msg =
+          data?.error ||
+          raw?.slice(0, 200) ||
+          `Register failed (${res.status} ${res.statusText})`;
+        throw new Error(msg);
+      }
+
+      // Expecting { token, user }
+      const token = data?.token;
+      const user  = data?.user;
+
+      if (!token || !user) {
+        throw new Error("Register succeeded but no token/user returned.");
+      }
+
+      // Persist auth (your app expects these keys elsewhere)
+      localStorage.setItem("gt_token", token);
+      localStorage.setItem("gt_user", JSON.stringify(user));
+
+      // Navigate to /login (same flow you used before)
+      navigate("/login", { replace: true });
+    } catch (e) {
+      setErr(e.message);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return (
+    <div className="card">
+      <h1>Create Account</h1>
+
+      {/* wrap inputs in a form so Enter submits */}
+      <form onSubmit={handleSignup} style={{ display: "contents" }}>
+        <input
           type="text"
-          id="username"
           className="login-input"
           placeholder="First"
-          required
-        />
-        <input
-          type="password"
-          id="password"
-          className="login-input"
-          placeholder="Last"
-          required
+          value={first}
+          onChange={(e) => setFirst(e.target.value)}
         />
         <input
           type="text"
-          id="username"
+          className="login-input"
+          placeholder="Last"
+          value={last}
+          onChange={(e) => setLast(e.target.value)}
+        />
+        <input
+          type="text"
           className="login-input"
           placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          autoComplete="username"
           required
         />
         <input
           type="password"
-          id="password"
           className="login-input"
-          placeholder="Password"
+          placeholder="Password (min 6)"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          autoComplete="new-password"
           required
         />
-            <div className="button-container">
-                <Button txt = "Home" page="/"/>
-                <Button txt = "Create" page = "/login"/>
-            </div> 
+
+        {err && <div style={{ color: "#b00020", marginTop: 8 }}>{err}</div>}
+
+        <div className="button-container">
+          <button type="button" onClick={() => navigate("/", { replace: true })}>
+            Home
+          </button>
+          <button type="submit" disabled={loading}>
+            {loading ? "Creating…" : "Create"}
+          </button>
         </div>
-    </>
-
-    );
-
+      </form>
+    </div>
+  );
 };
 
 export default Signup;

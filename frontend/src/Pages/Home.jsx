@@ -1,35 +1,77 @@
-import React from 'react';
-import '../index.css';
-import Button from '../Button';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "../index.css";
 
 const Home = () => {
-  return (
-      <div className="card">
-        <h1>Welcome to LI Golf</h1>
+  const navigate = useNavigate();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [err, setErr] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-        <p style={{ color: "#448071", fontSize: "1.5rem" }}>
-        Track your scores and stats!</p>
+  async function handleLogin(e) {
+    e?.preventDefault();
+    if (loading) return;
+    setErr(null);
+    setLoading(true);
+    try {
+      const res = await fetch("http://127.0.0.1:8080/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data?.error || "Login failed");
+
+      // persist session
+      localStorage.setItem("gt_token", data.token);
+      localStorage.setItem("gt_user", JSON.stringify(data.user));
+
+      // ✅ redirect via React Router (more reliable than alert + location.href)
+      navigate("/login", { replace: true });
+    } catch (e2) {
+      setErr(e2.message);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return (
+    <div className="card">
+      <h1>Welcome to LI Golf</h1>
+      <p style={{ color: "#448071", fontSize: "1.5rem" }}>Track your scores and stats!</p>
+
+      <form onSubmit={handleLogin}>
         <input
           type="text"
-          id="username"
           className="login-input"
           placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
           required
         />
 
         <input
           type="password"
-          id="password"
           className="login-input"
           placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
           required
         />
 
+        {err && <div style={{ color: "#b00020", marginTop: 8 }}>{err}</div>}
+
         <div className="button-container">
-          <Button txt="Login" page="/login" />
-          <Button txt="Create Account" page="/signup" />
+          <button type="submit" disabled={loading}>
+            {loading ? "Logging in…" : "Login"}
+          </button>
+          <button type="button" onClick={() => navigate("/signup")}>
+            Create Account
+          </button>
         </div>
-      </div>
+      </form>
+    </div>
   );
 };
 
