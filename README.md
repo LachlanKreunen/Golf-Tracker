@@ -7,11 +7,6 @@ Built with React, Node.js/Express, and MongoDB.
 - Round history and scorecard view
 - Persistent backend storage with MongoDB
 
-Repliicate:
-
-git clone https://github.com/LachlanKreunen/golf-tracker.git
-cd golf-tracker
-
 Install dependencies:
 
 cd backend
@@ -22,9 +17,6 @@ npm install
 
 cd backend
 npm start
-
-
-Frontend:
 
 cd frontend
 npm run dev
