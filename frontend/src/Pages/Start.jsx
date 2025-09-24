@@ -259,9 +259,8 @@ export default function Start() {
         state: {
           holeData,
           selectedTeeName,
-          // ✅ Pass a flat courseName so Hole.jsx can read it directly
+          // Pass a flat courseName so Hole.jsx can read it directly
           courseName: selectedCourse?.course_name ?? "",
-          // (optional) keep original course object if you use it elsewhere
           course: {
             id:
               selectedCourse?.id ??
