@@ -35,7 +35,7 @@ const Signup = () => {
 
       const raw = await res.text();
       let data = {};
-      try { data = raw ? JSON.parse(raw) : {}; } catch { /* non-JSON error */ }
+      try { data = raw ? JSON.parse(raw) : {}; } catch { /* non JSON error */ }
 
       if (!res.ok) {
         const msg =

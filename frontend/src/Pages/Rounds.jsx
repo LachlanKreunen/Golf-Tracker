@@ -101,7 +101,7 @@ const Rounds = () => {
 
   return (
     <section style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 16, width: "100%", padding: "8px 12px" }}>
-      {/* Hole overlay */}
+      {/* hole data */}
       {inspect && (
         <div
           onClick={(e)=>{ if(e.target === e.currentTarget) setInspect(null); }}

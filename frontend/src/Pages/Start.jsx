@@ -220,7 +220,7 @@ export default function Start() {
         payload = {};
       }
 
-      // Unwrap common shapes
+      // unwrap
       const courseObj =
         payload?.course ??
         payload?.data?.course ??
@@ -245,7 +245,7 @@ export default function Start() {
         }
       }
 
-      // Fallback: course-level holes
+        //fallback
       if (!holeData || holeData.length === 0) {
         if (Array.isArray(courseObj?.holes) && courseObj.holes.length > 0) {
           holeData = buildHoleDataFromCourse(courseObj);

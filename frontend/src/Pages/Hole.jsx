@@ -8,7 +8,6 @@ export default function Hole() {
   const navigate = useNavigate();
 
   const initialHoleData = location.state?.holeData;
-  // keep for saving, but do not display
   const courseName =
     location.state?.courseName ||
     location.state?.course?.name ||
@@ -44,7 +43,6 @@ export default function Hole() {
     setFir(h.fairwayHit ?? false);
     setPutts(h.putts ?? 2);
     setScore(h.score ?? (h.par ?? 4));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [idx]);
 
   // Persist current hole state in working copy

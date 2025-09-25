@@ -22,7 +22,7 @@ async function ensureMongo() {
   if (!client.topology || !client.topology.isConnected()) {
     await client.connect();
     await Users().createIndex({ username: 1 }, { unique: true });
-    console.log("✅ Mongo connected");
+    console.log("Mongo connected");
   }
 }
 
@@ -129,7 +129,7 @@ app.get("/rounds", requireAuth, async (req, res) => {
   }
 });
 
-// POST /rounds -> create a round for logged-in user
+// create a round for logged user
 app.post("/rounds", requireAuth, async (req, res) => {
   try {
     await ensureMongo();
@@ -161,8 +161,6 @@ app.post("/rounds", requireAuth, async (req, res) => {
     res.status(500).json({ error: "Create round failed" });
   }
 });
-
-// DELETE /rounds/:id  -> delete a round that belongs to the logged-in user
 app.delete("/rounds/:id", requireAuth, async (req, res) => {
   try {
     await ensureMongo();
@@ -172,16 +170,13 @@ app.delete("/rounds/:id", requireAuth, async (req, res) => {
       return res.status(400).json({ error: "Invalid round id" });
     }
 
-    // Only delete the current user's document
     const filter = { _id: new ObjectId(id), userId: new ObjectId(req.user.sub) };
     const result = await Rounds().deleteOne(filter);
 
     if (result.deletedCount === 0) {
-      // Either not found, or doesn’t belong to this user
+
       return res.status(404).json({ error: "Round not found" });
     }
-
-    // No payload needed; front-end is already optimistically updating
     return res.status(204).end();
   } catch (err) {
     console.error("DELETE /rounds/:id error:", err);

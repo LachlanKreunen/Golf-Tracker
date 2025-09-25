@@ -87,7 +87,7 @@ const Login = () => {
         }
 
         const averageScore = roundsCount ? totalScores / roundsCount : 0;
-        const averagePutts = totalHoles ? totalPutts / totalHoles : 0; // ✅ per hole
+        const averagePutts = totalHoles ? totalPutts / totalHoles : 0;
         const girPercent = girCount ? (girTrue / girCount) * 100 : 0;
         const firPercent = firCount ? (firTrue / firCount) * 100 : 0;
 
@@ -110,7 +110,7 @@ const Login = () => {
         setStats({
           handicap: Number(handicap.toFixed(1)),
           averageScore: Number(averageScore.toFixed(1)),
-          averagePutts: Number(averagePutts.toFixed(1)), // ✅ per hole
+          averagePutts: Number(averagePutts.toFixed(1)),
           girPercent: Number(girPercent.toFixed(1)),
           firPercent: Number(firPercent.toFixed(1)),
         });
