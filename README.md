@@ -22,5 +22,5 @@ cd frontend
 npm run dev
 
 
-Frontend runs at http://localhost:3000
-Backend runs at http://127.0.0.1:8080
+Frontend runs on port 3000
+Backend runs on port 8080
