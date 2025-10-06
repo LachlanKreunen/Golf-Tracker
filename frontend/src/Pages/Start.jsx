@@ -29,7 +29,7 @@ export default function Start() {
           method: "GET",
           headers: {
             Accept: "application/json",
-            Authorization: "Key SFLYRBLKGKXXKS7TVE2BYBV4LI",
+            Authorization: "Key SFLYRBLKGKXXKS7TVE2BYBV4LI", //should gitignore free API key
           },
           mode: "cors",
           cache: "no-store",
